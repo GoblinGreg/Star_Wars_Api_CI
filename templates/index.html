@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Star Wars Characters{% endblock %}
+
+{% block content %}
+<h1>Star Wars Characters</h1>
+
+<form method="GET" action="/">
+    <input type="text" name="name" placeholder="Search for a character..." value="{{ search_name }}">
+    <button type="submit">Search</button>
+</form>
+
+<div class="characters-list">
+    {% if characters %}
+    {% for character in characters %}
+    <div class="character-card">
+        <h2>{{ character.name }}</h2>
+        <p><strong>Height:</strong> {{ character.height }} cm</p>
+        <p>
+            <strong>Gender:</strong>
+            {% if character.gender.lower() in ['n/a', 'none'] %}
+            <span class="gender-special">{{ character.gender }}</span>
+            {% else %}
+            <span class="gender-normal">{{ character.gender }}</span>
+            {% endif %}
+        </p>
+    </div>
+    {% endfor %}
+    {% else %}
+    <p class="no-results">No characters found. Try a different search!</p>
+    {% endif %}
+</div>
+{% endblock %}
