@@ -26,7 +26,6 @@ def test_css_included(client):
     """Test that CSS is included correctly"""
     response = client.get('/')
     assert response.status_code == 200
-    # Sprawdź czy w HTML jest link do CSS
     assert b'style.css' in response.data or b'stylesheet' in response.data
 
 

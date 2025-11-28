@@ -22,7 +22,6 @@ def verify_application():
                 print(f"✓ Status Code: {response.status_code}")
                 print(f"✓ Response length: {len(response.text)} bytes")
 
-                # Sprawdź czy strona zawiera oczekiwaną zawartość
                 if "Star Wars" in response.text or "Characters" in response.text:
                     print("✓ Page content looks correct!")
                     sys.exit(0)

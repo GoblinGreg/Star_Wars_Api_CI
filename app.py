@@ -5,8 +5,6 @@ import os
 
 app = Flask(__name__)
 
-# Funkcja do pobierania danych z API lub z pliku lokalnego
-
 
 def get_characters(search_name=None):
     api_url = "https://swapi.dev/api/people/"
@@ -15,19 +13,16 @@ def get_characters(search_name=None):
         api_url += f"?search={search_name}"
 
     try:
-        # Próba pobrania danych z API
         response = requests.get(api_url, timeout=5)
         response.raise_for_status()
         data = response.json()
         return data.get('results', [])
     except (requests.ConnectionError, requests.Timeout, requests.RequestException) as e:
-        # W przypadku błędu, wczytaj dane z pliku lokalnego
         print(f"API Error: {e}. Loading from local file...")
         try:
             with open('characters.json', 'r') as f:
                 data = json.load(f)
 
-            # Jeśli jest wyszukiwanie, filtruj lokalnie
             if search_name:
                 results = [char for char in data if search_name.lower()
                            in char['name'].lower()]
@@ -51,7 +46,6 @@ def contact():
         email = request.form.get('email')
         message = request.form.get('message')
 
-        # Wyświetl w terminalu
         print(f"Email: {email}")
         print(f"Message: {message}")
 
