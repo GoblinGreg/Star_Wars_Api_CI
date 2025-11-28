@@ -5,8 +5,8 @@ import time
 
 
 def verify_application():
-    """Verify that the Flask application is running correctly on port 8085"""
-    url = "http://localhost:8085"
+    """Verify that the Flask application is running correctly on port 5001"""
+    url = "http://localhost:5001"
 
     max_retries = 30
     retry_delay = 2
