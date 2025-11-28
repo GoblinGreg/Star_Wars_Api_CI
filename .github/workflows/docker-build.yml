@@ -49,13 +49,18 @@ jobs:
         run: |
           docker exec flask-app pytest test_app.py -v
       
+      - name: Create lowercase owner variable
+        id: create_owner
+        run: echo "OWNER_LC=$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_OUTPUT
+        
       - name: Push to GitHub Container Registry
         uses: docker/build-push-action@v5
         with:
           context: .
           push: true
-          tags: ghcr.io/${{ github.repository_owner.toLower() }}/flask-starwars:latest
-      
+          tags: ghcr.io/${{ steps.create_owner.outputs.OWNER_LC }}/flask-starwars:latest
+          
+
       - name: Stop container
         if: always()
         run: docker stop flask-app || true
