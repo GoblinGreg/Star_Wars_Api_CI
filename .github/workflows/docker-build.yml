@@ -54,7 +54,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/flask-starwars:latest
+          tags: ghcr.io/${{ github.repository_owner | lower }}/flask-starwars:latest
       
       - name: Stop container
         if: always()
